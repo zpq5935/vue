@@ -49,6 +49,9 @@
               <el-menu-item index="3">
                 <i class="el-icon-setting"></i>导航三
               </el-menu-item>
+              <el-menu-item index="4">
+                <i class="el-icon-setting"></i>日记
+              </el-menu-item>
             </el-menu>
           </div>
         </el-col>
@@ -96,6 +99,10 @@ export default {
         case "3":
           this.$router.push("/Page3");
           this.breadcrumbItems = ["导航三"];
+          break;
+        case "4":
+          this.$router.push("/diaryIndex");
+          // this.breadcrumbItems = ["导航三"];
           break;
       }
     }

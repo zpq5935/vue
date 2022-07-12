@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import hello from '@/components/hello'
+import diaryIndex from '@/components/diary/index'
 
 Vue.use(Router)
 //获取原型对象上的push函数
@@ -21,6 +22,11 @@ export default new Router({
       path: '/hello',
       name: 'hello',
       component: hello
+    },
+    {
+      path: '/diaryIndex',
+      name: 'diaryIndex',
+      component: diaryIndex
     }
   ]
 })
