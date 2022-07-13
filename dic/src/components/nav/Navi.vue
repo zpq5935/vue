@@ -1,3 +1,4 @@
+
 <template>
   <div style="background-color: #EBEBEB;min-height:800px">
     <div style="width:100%;background-color: #636363; overflow: hidden">
@@ -38,19 +39,25 @@
               default-active="1"
               class="el-menu-vertical-demo"
               style="min-height:800px"
-              @select="handleSelect"
+              router
             >
-              <el-menu-item index="1">
+              <el-menu-item index="/hello">
                 <i class="el-icon-message"></i>hello
               </el-menu-item>
-              <el-menu-item index="2">
+              <el-menu-item index="/HelloWorld">
                 <i class="el-icon-menu"></i>HelloWorld
               </el-menu-item>
-              <el-menu-item index="3">
-                <i class="el-icon-setting"></i>导航三
-              </el-menu-item>
-              <el-menu-item index="4">
-                <i class="el-icon-setting"></i>日记
+              <el-menu-item >
+                <i class="el-icon-tickets"></i>日记
+                <el-menu-item index="4-1">
+                  <i class="el-icon-s-home"></i>日记首页
+                </el-menu-item>
+                <el-menu-item  index="/diaryIndex">
+                  <i class="el-icon-plus"></i>日记新增
+                </el-menu-item>
+                <el-menu-item index="/calendar">
+                  <i class="el-icon-date"></i>日历
+                </el-menu-item>
               </el-menu-item>
             </el-menu>
           </div>
@@ -85,26 +92,6 @@ export default {
   methods: {
     handleIconClick(ev) {
       console.log(ev);
-    },
-    handleSelect(key, keyPath) {
-      switch (key) {
-        case "1":
-          this.$router.push("/hello");
-          this.breadcrumbItems = ["hello"];
-          break;
-        case "2":
-          this.$router.push("/HelloWorld");
-          this.breadcrumbItems = ["HelloWorld"];
-          break;
-        case "3":
-          this.$router.push("/Page3");
-          this.breadcrumbItems = ["导航三"];
-          break;
-        case "4":
-          this.$router.push("/diaryIndex");
-          // this.breadcrumbItems = ["导航三"];
-          break;
-      }
     }
   }
 };
