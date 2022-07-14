@@ -47,7 +47,7 @@ export default {
 
       axios({
         method: "post",
-        url: "/zpq/diary",
+        url: "/api/zpq/diary",
         headers: {
           "Content-Type": "application/json"
         },
