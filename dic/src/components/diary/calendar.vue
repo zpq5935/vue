@@ -1,13 +1,23 @@
 <template>
-  <el-calendar>
-    <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
+  <el-calendar v-model="value">
     <template slot="dateCell" slot-scope="{date, data}">
-      <p
-        :class="data.isSelected ? 'is-selected' : ''"
-      >{{ data.day }} {{ data.isSelected ? '✔️' : ''}} </p>
-      <div v-for="item in calendarData" @click="printDiares">
-        <div v-if="(item.diaryDate)==data.day" class="is-selected">{{item.title}}</div>
-      </div>
+      <p>{{ data.day }} {{ data.isSelected ? '✔️' : ''}}</p>
+      <template v-for="(item,index) in calendarData">
+        <el-popover
+          v-if="(item.diaryDate)==data.day"
+          :title="item.title"
+          width="200"
+          :key="index"
+          trigger="hover"
+          content="待定待定待定待定待定"
+        >
+          <el-button slot="reference">Detail</el-button>
+        </el-popover>
+        <!-- <el-tooltip class="item" effect="dark" :content="item.title" placement="right">
+              <el-button slot="reference">hover 激活</el-button>
+              <div>{{item.title}}</div>
+        </el-tooltip>-->
+      </template>
     </template>
   </el-calendar>
 </template>
@@ -15,6 +25,13 @@
 <style>
 .is-selected {
   color: red;
+}
+.has-diary {
+  background-color: orange;
+}
+.right-top-corner {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
 
@@ -27,6 +44,7 @@ export default {
   data() {
     return {
       value: new Date(),
+      oldValue: new Date(),
       calendarData: [
         {
           title: "",
@@ -38,27 +56,48 @@ export default {
   },
 
   mounted() {
-    console.log(this.value);
-    console.log(moment(this.value).format("yyyy-MM"));
-    axios({
-      method: "get",
-      url:
-        "/api/zpq/diary/calendarView?" +
-        "date=" +
-        moment(this.value).format("yyyy-MM")
-      // data: {"date":this.value}
-    }).then(res => {
-      console.log(res);
-      this.calendarData = res.data.data;
-      for (var index in res.data.data) {
-        console.log(res.data.data[index]);
-      }
-    });
+    this.refreshDiaryView();
   },
 
   methods: {
-    printDiares() {
-      console.log("diaries", this.calendarData);
+    getTitle(data) {
+      for (var index in this.calendarData) {
+        if (data.day == this.calendarData[index].diaryDate) {
+          return this.calendarData[index].title;
+        }
+      }
+      return "";
+    },
+    showTitle(data) {
+      for (var index in this.calendarData) {
+        if (data.day == this.calendarData[index].diaryDate) {
+          console.log(this.calendarData[index].title);
+          return;
+        }
+      }
+    },
+    refreshDiaryView() {
+      axios({
+        method: "get",
+        url:
+          "/api/zpq/diary/calendarView?" +
+          "date=" +
+          moment(this.value).format("yyyy-MM")
+        // data: {"date":this.value}
+      }).then(res => {
+        this.calendarData = res.data.data;
+      });
+    }
+  },
+
+  watch: {
+    value: function(val) {
+      if (
+        moment(this.oldValue).format("yyyyMM") != moment(val).format("yyyyMM")
+      ) {
+        this.refreshDiaryView();
+      }
+      this.oldValue = val;
     }
   }
 };
