@@ -1,25 +1,29 @@
 <template>
-  <el-calendar v-model="value">
-    <template slot="dateCell" slot-scope="{date, data}">
-      <p>{{ data.day }} {{ data.isSelected ? '✔️' : ''}}</p>
-      <template v-for="(item,index) in calendarData">
-        <el-popover
-          v-if="(item.diaryDate)==data.day"
-          :title="item.title"
-          width="200"
-          :key="index"
-          trigger="hover"
-          content="待定待定待定待定待定"
-        >
-          <el-button slot="reference">Detail</el-button>
-        </el-popover>
-        <!-- <el-tooltip class="item" effect="dark" :content="item.title" placement="right">
-              <el-button slot="reference">hover 激活</el-button>
-              <div>{{item.title}}</div>
-        </el-tooltip>-->
-      </template>
-    </template>
-  </el-calendar>
+  <el-container>
+    <el-header>
+      <el-button icon="el-icon-refresh-left" @click="refreshDiaryView()">Refresh</el-button>
+    </el-header>
+    <el-main>
+      <el-calendar v-model="value">
+        <template slot="dateCell" slot-scope="{date, data}">
+          <p>{{ data.day }} {{ data.isSelected ? '✔️' : ''}}</p>
+          <template v-for="(item,index) in calendarData">
+            <el-popover v-if="(item.diaryDate)==data.day" :key="index" trigger="hover">
+              <el-form label-width="100px">
+                <el-form-item label="日期：">{{item.diaryDate}}</el-form-item>
+                <el-form-item label="标题：">{{item.title}}</el-form-item>
+                <el-form-item label="工作相关：">{{item.contentWork}}</el-form-item>
+                <el-form-item label="技术相关：">{{item.contentSkill}}</el-form-item>
+                <el-form-item label="面试相关：">{{item.contentInterview}}</el-form-item>
+                <el-form-item label="其他：">{{item.contentOther}}</el-form-item>
+              </el-form>
+              <el-button slot="reference">Detail</el-button>
+            </el-popover>
+          </template>
+        </template>
+      </el-calendar>
+    </el-main>
+  </el-container>
 </template>
 
 <style>
@@ -49,7 +53,11 @@ export default {
         {
           title: "",
           diaryDate: "",
-          id: ""
+          id: "",
+          contentInterview: "",
+          contentOther: "",
+          contentSkill: "",
+          contentWork: ""
         }
       ]
     };

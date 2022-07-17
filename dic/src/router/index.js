@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import hello from '@/components/hello'
-import diaryIndex from '@/components/diary/diaryIndex'
+import diaryAdd from '@/components/diary/diaryAdd'
 import calendar from '@/components/diary/calendar'
 
 Vue.use(Router)
@@ -25,9 +25,9 @@ export default new Router({
       component: hello
     },
     {
-      path: '/diaryIndex',
-      name: 'diaryIndex',
-      component: diaryIndex
+      path: '/diaryAdd',
+      name: 'diaryAdd',
+      component: diaryAdd
     },
     {
       path: '/calendar',
