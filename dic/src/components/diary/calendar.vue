@@ -12,10 +12,10 @@
               <el-form label-width="100px">
                 <el-form-item label="日期：">{{item.diaryDate}}</el-form-item>
                 <el-form-item label="标题：">{{item.title}}</el-form-item>
-                <el-form-item label="工作相关：">{{item.contentWork}}</el-form-item>
-                <el-form-item label="技术相关：">{{item.contentSkill}}</el-form-item>
-                <el-form-item label="面试相关：">{{item.contentInterview}}</el-form-item>
-                <el-form-item label="其他：">{{item.contentOther}}</el-form-item>
+                <el-form-item label="工作相关：" ><div v-html="item.contentWork"/></el-form-item>
+                <el-form-item label="技术相关：" ><div v-html="item.contentSkill"/></el-form-item>
+                <el-form-item label="面试相关："><div v-html="item.contentInterview"/></el-form-item>
+                <el-form-item label="其他："><div v-html="item.contentOther"/></el-form-item>
               </el-form>
               <el-button slot="reference">Detail</el-button>
             </el-popover>
