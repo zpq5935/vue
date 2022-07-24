@@ -4,12 +4,16 @@
       <el-input v-model="formMess.title" placeholder="默认为 {年月日}日记" />
     </el-form-item>
     <el-form-item label="日期">
-      <el-input v-model="formMess.diaryDate" placeholder="yyyy-MM-dd,默认为今日" />
+      <el-date-picker
+        v-model="formMess.diaryDate"
+        type="date"
+        placeholder="选择日期，默认为今日">
+      </el-date-picker>
     </el-form-item>
     <el-form-item label="请输入面试相关">
       <el-input type="textarea" v-model="formMess.contentInterview" />
     </el-form-item>
-    <el-form-item label="请输入工作相关">
+    <el-form-item label="请输入技术相关">
       <el-input type="textarea" v-model="formMess.contentSkill" />
     </el-form-item>
     <el-form-item label="请输入工作相关">
@@ -44,7 +48,7 @@ export default {
   methods: {
     onSubmit() {
       /* json格式提交： */
-      let formData = JSON.stringify(this.formMess);
+      // let formData = JSON.stringify(this.formMess);
 
       /* formData格式提交： */
       //   let formData = new FormData();
@@ -59,7 +63,7 @@ export default {
           "Content-Type": "application/json"
         },
         withCredentials: true,
-        data: formData
+        data: this.formMess
       }).then(res => {
         if (res.data.code != 200) {
           this.$message({
@@ -77,4 +81,3 @@ export default {
   }
 };
 </script>
- 
