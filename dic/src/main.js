@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import Navi from './components/nav/Navi.vue'
+import Index from './components/index.vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import router from './router'
@@ -16,11 +17,11 @@ Vue.config.productionTip = false
 //   el: '#app',
 //   router,
 //   components: { Navi }
-  
+
 // })
 
 new Vue({
   el: '#app',
   router,
-  render: h => h(Navi)
+  render: h => h(Index)
 })

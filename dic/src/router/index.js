@@ -4,14 +4,17 @@ import HelloWorld from '@/components/HelloWorld'
 import hello from '@/components/hello'
 import diaryAdd from '@/components/diary/diaryAdd'
 import calendar from '@/components/diary/calendar'
+import test from '@/components/test'
 
 Vue.use(Router)
+
 //获取原型对象上的push函数
 const originalPush = Router.prototype.push
 //修改原型对象中的push方法
 Router.prototype.push = function push(location) {
    return originalPush.call(this, location).catch(err => err)
 }
+
 // Date对象转json，时间一致
 function dateFormat(date, fmt) {
   if (null == date || undefined == date) return '';
@@ -52,6 +55,11 @@ export default new Router({
       path: '/calendar',
       name: 'calendar',
       component: calendar
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
     }
   ]
 })
